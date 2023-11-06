@@ -2,8 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{html,go}"],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+            "chivo": ["Chivo", "ui-sans-serif"],
+            "karma": ["Karma", "ui-serif"],
+            "nunito": ["Nunito", "ui-sans-serif"],
+        },
+    },
   },
-  plugins: [],
+  plugins: [
+      require('@tailwindcss/forms'),
+  ],
 }
 
