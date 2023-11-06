@@ -39,9 +39,9 @@ func httpHandler(responseWriter http.ResponseWriter, request *http.Request) {
 
 func main() {
     registerRoutes()
-    err := http.ListenAndServe(":3000", router)
     fileSystem := http.FileServer(http.Dir("src/static/"))
-    router.Handle("/src/static/", http.StripPrefix("/src/static/", fileSystem))
+    router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fileSystem))
+    err := http.ListenAndServe(":3000", router)
     if err != nil {
         fmt.Println("There was an error starting the server:", err.Error())
         os.Exit(1)
