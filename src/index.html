@@ -12,9 +12,20 @@
         <h1 class="text-3xl font-nunito text-center">What do I want?</h1>
         <h2 class="text-xl font-karma text-center">A list of the wants that you need.</h2>
     </div>
-    <div>
-        <input type="text" placeholder="www.example.com/product" />
-        <button class="px-2 py-1 bg-blue-500 h-full text-white -ml-1">Add</button>
-    </div>
+    <form method="post" action="/api/process-item" class="flex flex-col">
+        <span>
+            {{if .Url}}
+            {{if .Error }}
+            <input type="text" placeholder="www.example.com/product" name="url" aria-invalid="true" value={{.Url}} class="border-red-400" />
+            {{else}}
+            <input type="text" placeholder="www.example.com/product" name="url" value={{.Url}} />
+            {{end}}
+            {{else}}
+            <input type="text" placeholder="www.example.com/product" name="url" />
+            {{end}}
+            <button class="px-2 py-1 bg-blue-500 h-full text-white -ml-1">Add</button>
+        </span>
+        <p style="color: red;">{{.Error}}</p>
+    </form>
 </body>
 </html>
