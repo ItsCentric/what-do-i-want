@@ -1,31 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/styles.css" >
-    <link rel="stylesheet" href="static/tailwind.css" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/styles.css" />
+    <link rel="stylesheet" href="static/tailwind.css" />
     <title>What do I want?</title>
-</head>
-<body class="font-chivo flex flex-col justify-center items-center gap-2">
+  </head>
+  <body class="font-chivo flex flex-col justify-center items-center gap-2">
     <div>
-        <h1 class="text-3xl font-nunito text-center">What do I want?</h1>
-        <h2 class="text-xl font-karma text-center">A list of the wants that you need.</h2>
+      <h1 class="text-3xl font-nunito text-center">What do I want?</h1>
+      <h2 class="text-xl font-karma text-center">
+        A list of the wants that you need.
+      </h2>
     </div>
     <form method="post" action="/api/process-item" class="flex flex-col">
-        <span>
-            {{if .Url}}
-            {{if .Error }}
-            <input type="text" placeholder="www.example.com/product" name="url" aria-invalid="true" value={{.Url}} class="border-red-400" />
-            {{else}}
-            <input type="text" placeholder="www.example.com/product" name="url" value={{.Url}} />
-            {{end}}
-            {{else}}
-            <input type="text" placeholder="www.example.com/product" name="url" />
-            {{end}}
-            <button class="px-2 py-1 bg-blue-500 h-full text-white -ml-1">Add</button>
-        </span>
-        <p style="color: red;">{{.Error}}</p>
+      <span>
+        {{if .Url.Url}} {{if .Url.Error }}
+        <input
+          type="text"
+          placeholder="www.example.com/product"
+          name="url"
+          aria-invalid="true"
+          value="{{.Url}}"
+          class="border-red-400"
+        />
+        {{else}}
+        <input
+          type="text"
+          placeholder="www.example.com/product"
+          name="url"
+          value="{{.Url}}"
+        />
+        {{end}} {{else}}
+        <input type="text" placeholder="www.example.com/product" name="url" />
+        {{end}}
+        <button class="px-2 py-1 bg-blue-500 h-full text-white -ml-1">
+          Add
+        </button>
+      </span>
+      <p>{{.Product.Name}}</p>
+      <p style="color: red">{{.Error}}</p>
     </form>
-</body>
+    <div class="border rounded-xl">
+      <p>{{.Product.Name}}</p>
+      <p>{{.Product.Price}}</p>
+      <img src="{{.Product.Image}}" alt="{{.Name}}" />
+    </div>
+  </body>
 </html>
